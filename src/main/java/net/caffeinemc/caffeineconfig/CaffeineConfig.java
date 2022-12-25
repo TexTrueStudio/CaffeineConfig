@@ -1,11 +1,11 @@
 package net.caffeinemc.caffeineconfig;
 
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
-import net.fabricmc.loader.api.FabricLoader;
-import net.fabricmc.loader.api.ModContainer;
-import net.fabricmc.loader.api.metadata.CustomValue;
-import net.fabricmc.loader.api.metadata.CustomValue.CvType;
-import net.fabricmc.loader.api.metadata.ModMetadata;
+//import net.fabricmc.loader.api.FabricLoader;
+//import net.fabricmc.loader.api.ModContainer;
+//import net.fabricmc.loader.api.metadata.CustomValue;
+//import net.fabricmc.loader.api.metadata.CustomValue.CvType;
+//import net.fabricmc.loader.api.metadata.ModMetadata;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -38,7 +38,7 @@ public final class CaffeineConfig {
      * <p>Creates and returns a {@link CaffeineConfig.Builder} that can be used to create a {@link CaffeineConfig} object.</p>
      * 
      * <p>Unless the methods in the builder are later called, the given {@code modName} will be used to get the logger and the JSON key.</p>
-     * <p>The default logger is the one gotten from {@link LogManager#getLogger(String)} with the name {@code modName+" Config"}, and the default
+     * <p>The default logger is the one gotten from {@link LoggerFactory#getLogger(String)} with the name {@code modName+" Config"}, and the default
      * JSON key is {@code lowercase(modName):options}. For example, if {@code modName} is {@code ExampleMod}, logger will be {@code ExampleModConfig}
      * and JSON key will be {@code examplemod:options} </p>
      * 
@@ -123,10 +123,10 @@ public final class CaffeineConfig {
             option.setEnabled(enabled, true);
         }
     }
-
+    /*
     private void applyModOverrides(String jsonKey) {
-        for (ModContainer container : FabricLoader.getInstance().getAllMods()) {
-            ModMetadata meta = container.getMetadata();
+        for (IModInfo container : ModList.get().getMods()) {
+            ModJarMetadata meta = container.getMetadata();
 
             if (meta.containsCustomValue(jsonKey)) {
                 CustomValue overrides = meta.getCustomValue(jsonKey);
@@ -143,7 +143,7 @@ public final class CaffeineConfig {
         }
     }
 
-    private void applyModOverride(ModMetadata meta, String name, CustomValue value) {
+    private void applyModOverride(ModJarMetadata meta, String name, CustomValue value) {
         Option option = this.options.get(name);
 
         if (option == null) {
@@ -167,6 +167,7 @@ public final class CaffeineConfig {
             option.addModOverride(enabled, meta.getId());
         }
     }
+     */
 
     /**
      * Returns the effective option for the specified class name. This traverses the package path of the given mixin
@@ -354,7 +355,7 @@ public final class CaffeineConfig {
                 }
             }
 
-            applyModOverrides(jsonKey);
+            //applyModOverrides(jsonKey);
 
             // Check dependencies several times, because one iteration may disable a option required by another option
             // This terminates because each additional iteration will disable one or more options, and there is only a finite number of rules

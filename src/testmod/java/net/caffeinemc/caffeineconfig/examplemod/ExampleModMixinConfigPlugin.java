@@ -2,7 +2,8 @@ package net.caffeinemc.caffeineconfig.examplemod;
 
 import net.caffeinemc.caffeineconfig.AbstractCaffeineConfigMixinPlugin;
 import net.caffeinemc.caffeineconfig.CaffeineConfig;
-import net.fabricmc.loader.api.FabricLoader;
+import net.minecraftforge.fml.loading.FMLPaths;
+//import net.fabricmc.loader.api.FabricLoader;
 
 public class ExampleModMixinConfigPlugin extends AbstractCaffeineConfigMixinPlugin {
 
@@ -15,7 +16,8 @@ public class ExampleModMixinConfigPlugin extends AbstractCaffeineConfigMixinPlug
                 .addMixinOption("block.hopper", true)
                 .addOptionDependency("block.hopper", "ai", true)
                 .withInfoUrl("https://example.org")
-                .build(FabricLoader.getInstance().getConfigDir().resolve("examplemod.properties"));
+                .build(FMLPaths.CONFIGDIR.get().resolve("examplemod.properties"));
+                //.build(FabricLoader.getInstance().getConfigDir().resolve("examplemod.properties"));
     }
 
     @Override

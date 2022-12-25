@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.11-SNAPSHOT'
+	id 'dev.architectury.loom' version '1.0-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -22,7 +22,8 @@ dependencies {
 	// We only depend in loader and therefore mixin, but loom won't make a mod without minecraft and mappings
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	//modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	forge "net.minecraftforge:forge:${project.forge_version}"
 
 	afterEvaluate {
         testmodImplementation sourceSets.main.output

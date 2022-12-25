@@ -13,9 +13,7 @@ import org.slf4j.Logger;
 /**
  * <p>A config option that can be enabled or disabled.</p>
  * 
- * <p>An option can be toggled by the user setting the name in the config file, 
- * or by a mod by declaring it in their {@code fabric.mod.json} file as a custom
- * value inside a custom value map with this mod's name.</p>
+ * <p>An option can be toggled by the user setting the name in the config file.</p>
  *
  */
 public final class Option {

@@ -1,8 +1,7 @@
 # CaffeineConfig
 
 CaffeineConfig is a mixin configuration manager that allows both the user and other mods to configure what mixins should
-apply and which shouldn't in a simple manner, and without the mods having to depend on each other. It is used in 
-the [Sodium](https://github.com/CaffeineMC/sodium-fabric) and [Lithium](https://github.com/CaffeineMC/lithium-fabric) mods.
+apply and which shouldn't in a simple manner, and without the mods having to depend on each other. 
 
 ## Usage
 
@@ -15,7 +14,6 @@ Adding the CaffeineMC maven to your `build.gradle`:
 
 ```groovy
 repositories {
-    ...
     // TODO this when I know the url
 }
 ```
@@ -24,9 +22,7 @@ Adding CaffeineConfig as a dependency and as a Jar-in-Jar in your mod:
 
 ```groovy
 dependencies {
-    ...
-    modImplementation 'net.caffeinemc:CaffeineConfig:1.0.0'
-    include 'net.caffeinemc:CaffeineConfig:1.0.0'
+    modImplementation include 'net.caffeinemc:CaffeineConfig:1.0.0'
 }
 ```
 
