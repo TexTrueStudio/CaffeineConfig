@@ -5,7 +5,7 @@ license = "LGPLv3"
 [[mods]]
 modId = "caffeineconfig"
 version = "${version}"
-displayName = "CaffeineConfig-Forge"
+displayName = "ColaConfig"
 displayURL="https://github.com/TexTrueStudio/CaffeineConfig"
 logoFile="icon.png"
 credits="CafffeineMC"

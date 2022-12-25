@@ -5,7 +5,7 @@ license = "LGPLv3"
 [[mods]]
 modId = "caffeineconfig_test"
 version = "${version}"
-displayName = "CaffeineConfig-Forge Example Mod"
+displayName = "ColaConfig Example Mod"
 displayURL="https://changeme.dev/"
 logoFile="icon.png"
 credits="CafffeineMC"
