@@ -14,7 +14,7 @@ Adding the CaffeineMC maven to your `build.gradle`:
 
 ```groovy
 repositories {
-    // TODO this when I know the url
+    url "https://jitpack.io"
 }
 ```
 
@@ -22,7 +22,7 @@ Adding CaffeineConfig as a dependency and as a Jar-in-Jar in your mod:
 
 ```groovy
 dependencies {
-    modImplementation include 'net.caffeinemc:CaffeineConfig:1.0.0'
+    modImplementation include 'com.github.TexTrueStudio:CaffeineConfig:1.0.0-alpha'
 }
 ```
 
