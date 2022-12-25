@@ -1,16 +1,18 @@
-# CaffeineConfig
+# ColaConfig
 
-CaffeineConfig is a mixin configuration manager that allows both the user and other mods to configure what mixins should
+ColaConfig is Unofficial CaffeineConfig forge port.
+
+ColaConfig is a mixin configuration manager that allows both the user and other mods to configure what mixins should
 apply and which shouldn't in a simple manner, and without the mods having to depend on each other. 
 
 ## Usage
 
-### Adding CaffeineConfig as a dependency to your project
+### Adding ColaConfig as a dependency to your project
 
-To use `CaffeineConfig` you'll first need to add the CaffeineMC maven to the repositories block of your `build.gradle` file, and then add
-CaffeineConfig as a dependency. You should include CaffeineConfig as Jar-in-Jar with your mod.
+To use `ColaConfig` you'll first need to add the maven to the repositories block of your `build.gradle` file, and then add
+ColaConfig as a dependency. You should include ColaConfig as Jar-in-Jar with your mod.
 
-Adding the CaffeineMC maven to your `build.gradle`:
+Adding the maven to your `build.gradle`:
 
 ```groovy
 repositories {
@@ -18,24 +20,23 @@ repositories {
 }
 ```
 
-Adding CaffeineConfig as a dependency and as a Jar-in-Jar in your mod:
+Adding ColaConfig as a dependency and as a Jar-in-Jar in your mod:
 
 ```groovy
 dependencies {
-    modImplementation include 'com.github.TexTrueStudio:CaffeineConfig:1.0.0-alpha'
+    modImplementation include 'com.github.TexTrueStudio:ColaMixinConfig:1.0.1-alpha'
 }
 ```
 
-While not strictly necessary, you should also declare the dependency in your `fabric.mod.json`:
+While not strictly necessary, you should also declare the dependency in your `META-INF/mods.toml`:
 
-```json
-{
-    ...
-    "depends": {
-        ...
-        "caffeineconfig": ">=1.0.0"
-    }
-}
+```toml
+[[dependencies.caffeineconfig]]
+    modId = "caffeineconfig"
+    mandatory = true
+    versionRange = "[1.0,)"
+    ordering = "NONE"
+    side = "BOTH"
 ```
 
 ### Extending AbstractCaffeineConfigMixinPlugin
@@ -67,7 +68,7 @@ public class ExampleModMixinConfigPlugin extends AbstractCaffeineConfigMixinPlug
 
 ```
 
-### Creating a CaffeineConfig object
+### Creating a ColaConfig object
 
 In order to create a `CaffeineConfig` object you'll first need to get a `Builder` by using the `CaffeineConfig.builder(modName)`
 method. By default, this will get a logger with the mod's name and `Config` appended to it and use it as its logger,
@@ -122,7 +123,7 @@ An example is the following:
     "defaultRequire": 1
   },
   "mixins": [
-    ...
+
   ]
 }
 ```
@@ -133,5 +134,5 @@ Any mixin added to the config (the config being the mixins JSON file) must have 
 will throw an `IllegalStateException` when applying it. This is to ensure mixins are added to the config and to prevent hard to
 debug problems where mixins silently don't apply because they weren't assigned to any option.
 
-If you want to add mixins that are not configurable, you should add them to a different mixin config, that is, a different mixin json
-file that is therefore another entry in your `fabric.mod.json`.
+~~If you want to add mixins that are not configurable, you should add them to a different mixin config, that is, a different mixin json
+file that is therefore another entry in your `fabric.mod.json`.~~ (This feature is not enabled)
