@@ -101,7 +101,7 @@ An example for creating a `CaffeineConfig` instance for use in a class extending
                 .addMixinOption("block.hopper", true)
                 .addOptionDependency("block.hopper", "ai", true) // block.hopper will be disabled if ai is disabled
                 .withInfoUrl("https://example.org")
-                .build(FabricLoader.getInstance().getConfigDir().resolve("examplemod.properties"));
+                .build(FMLPaths.CONFIGDIR.get().resolve("examplemod.properties"));
     }
 
 ```
