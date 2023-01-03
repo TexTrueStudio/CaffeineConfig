@@ -15,8 +15,9 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import net.minecraftforge.fml.loading.moddiscovery.ModInfo;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * <p>A mixin configuration object. Holds the {@link Option options} defined and handles overrides.</p>
@@ -38,7 +39,7 @@ public final class CaffeineConfig {
      * <p>Creates and returns a {@link CaffeineConfig.Builder} that can be used to create a {@link CaffeineConfig} object.</p>
      * 
      * <p>Unless the methods in the builder are later called, the given {@code modName} will be used to get the logger and the JSON key.</p>
-     * <p>The default logger is the one gotten from {@link LoggerFactory#getLogger(String)} with the name {@code modName+" Config"}, and the default
+     * <p>The default logger is the one gotten from {@link LogManager#getLogger(String)} with the name {@code modName+" Config"}, and the default
      * JSON key is {@code lowercase(modName):options}. For example, if {@code modName} is {@code ExampleMod}, logger will be {@code ExampleModConfig}
      * and JSON key will be {@code examplemod:options} </p>
      * 
@@ -48,7 +49,7 @@ public final class CaffeineConfig {
      */
     public static CaffeineConfig.Builder builder(String modName) {
         CaffeineConfig config = new CaffeineConfig(modName);
-        config.logger = LoggerFactory.getLogger(modName + " Config");
+        config.logger = LogManager.getLogger(modName + " Config");
         String jsonKey = modName.toLowerCase() + ":options";
         return config.new Builder().withSettingsKey(jsonKey);
     }
@@ -123,40 +124,42 @@ public final class CaffeineConfig {
             option.setEnabled(enabled, true);
         }
     }
-    /*
+/*
     private void applyModOverrides(String jsonKey) {
         for (IModInfo container : ModList.get().getMods()) {
-            ModJarMetadata meta = container.getMetadata();
+            ModInfo meta = container.getModId();
 
             if (meta.containsCustomValue(jsonKey)) {
-                CustomValue overrides = meta.getCustomValue(jsonKey);
+                Object overrides = meta.getCustomValue(jsonKey);
 
-                if (overrides.getType() != CvType.OBJECT) {
-                    logger.warn("Mod '{}' contains invalid {} option overrides, ignoring", meta.getId(), modName);
+                if (!(container instanceof Object)) {
+                    logger.warn("Mod '{}' contains invalid {} option overrides, ignoring", meta.getModId(), modName);
                     continue;
                 }
 
-                for (Map.Entry<String, CustomValue> entry : overrides.getAsObject()) {
+                for (Map.Entry<String, Object> entry : overrides.getAsObject()) {
                     this.applyModOverride(meta, entry.getKey(), entry.getValue());
                 }
             }
         }
     }
+ */
 
-    private void applyModOverride(ModJarMetadata meta, String name, CustomValue value) {
+
+    private void applyModOverride(ModInfo meta, String name, Object value) {
         Option option = this.options.get(name);
 
         if (option == null) {
-            logger.warn("Mod '{}' attempted to override option '{}', which doesn't exist, ignoring", meta.getId(), name);
+            logger.warn("Mod '{}' attempted to override option '{}', which doesn't exist, ignoring", meta.getModId(), name);
             return;
         }
 
-        if (value.getType() != CvType.BOOLEAN) {
-            logger.warn("Mod '{}' attempted to override option '{}' with an invalid value, ignoring", meta.getId(), name);
+        if (!(value instanceof Boolean)) {
+            logger.warn("Mod '{}' attempted to override option '{}' with an invalid value, ignoring", meta.getModId(), name);
             return;
         }
 
-        boolean enabled = value.getAsBoolean();
+        boolean enabled = (Boolean) value;
 
         // disabling the option takes precedence over enabling
         if (!enabled && option.isEnabled()) {
@@ -164,10 +167,10 @@ public final class CaffeineConfig {
         }
 
         if (!enabled || option.isEnabled() || option.getDefiningMods().isEmpty()) {
-            option.addModOverride(enabled, meta.getId());
+            option.addModOverride(enabled, meta.getModId());
         }
     }
-     */
+
 
     /**
      * Returns the effective option for the specified class name. This traverses the package path of the given mixin
