@@ -16,7 +16,7 @@ Adding the maven to your `build.gradle`:
 
 ```groovy
 repositories {
-    url "https://jitpack.io"
+    maven { url 'https://jitpack.io' }
 }
 ```
 
@@ -24,7 +24,7 @@ Adding ColaConfig as a dependency and as a Jar-in-Jar in your mod:
 
 ```groovy
 dependencies {
-    modImplementation include 'com.github.TexTrueStudio:ColaMixinConfig:v1.0.1-alpha'
+    modImplementation include 'com.github.TexTrueStudio:ColaMixinConfig:v1.0.2'
 }
 ```
 
